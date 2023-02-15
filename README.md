@@ -19,4 +19,4 @@ Blah blah blah blah
 - [Dalveer Dosanjh](https://github.com/dal-dos)
 - [Stephen Dao](https://github.com/pingoyes)
 - [Alfonso Ocampo](https://github.com/alfonsoocampo)
-- [Joshua Huang](https://github.com/)
+- [Joshua Huang](https://github.com/dal-dos/FlipClock)
