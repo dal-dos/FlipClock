@@ -4,7 +4,7 @@
   </a>
   <h2></h2>
  <h3 align="center">Just Flip It!</h3>
- <h6 align="center"><a href="https://davenchohan.github.io/spotify_tracker/home.html">Website</a></h6>
+ <h6 align="center"><a href="https://github.com/dal-dos/Flip-Clock#readme">Website</a></h6>
 </p>
 
 
