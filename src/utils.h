@@ -51,4 +51,32 @@ void Utils_run_command(char* command);
  */
 void Utils_write_to_file(char* file_path, char* val);
 
+/**
+ * Initializes the I2C device
+ *
+ * @param bus a string representing the filepath of the I2C bus to use
+ * @param address an int representing the I2C device address
+ * @return an int representing the file descriptor of the I2C device
+ */
+int Utils_initI2cBus(char* bus, int address);
+
+/**
+ * Writes to the specified I2C register
+ *
+ * @param i2cFileDesc an int representing the file descriptor of the I2C device to write to
+ * @param regAddr a char representing the address of the register to write to
+ * @param value a char representing the value to write to the i2c register
+ */
+void Utils_writeI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char value);
+
+/**
+ * Reads multiple bytes from the specified I2C register
+ *
+ * @param i2cFileDesc an int representing the file descriptor of the I2C device to read from
+ * @param regAddr a char representing the address of the register to start reading from
+ * @param buff a char buffer representing the destination to read the register values into
+ * @param buff_len an int representing the number of bytes to read
+ */
+void Utils_readMultipleI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char* buff, int buff_len);
+
 #endif
