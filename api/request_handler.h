@@ -9,8 +9,11 @@
  * Handle an api request
  *
  * @param request the request received
- * @param sin_remote a pointer referencing the client sending the request
+ * @param buff a buffer to write the returned value to
  */
-void Handler_make_request(char* request, struct sockaddr *sin_remote);
+void Handler_make_request(char* request, char* buff);
+
+// returns a bool representing whether the program should be running
+bool Handler_get_flag(void);
 
 #endif
