@@ -9,7 +9,7 @@
 
 #include "udp_socket.h"
 #include "request_handler.h"
-#include "utils.h"
+#include "../src/utils.h"
 
 #define MSG_MAX_LEN 1500
 #define PORT        12345

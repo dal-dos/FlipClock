@@ -23,10 +23,8 @@ void Handler_make_request(char* request, char* buff) {
     } else if (strncmp(request, "set ", strlen("set ")) == 0) {
         char* req = request+strlen("set ");
         if (strncmp(req, "beat ", strlen("beat ")) == 0) {
-            int beat_id = atoi(request + strlen("beat "));
             snprintf(buff, MSG_MAX_LEN-1, "1");
         } else if (strncmp(req, "volume ", strlen("volume ")) == 0) {
-            int interval = 5;
             if (strncmp(req+strlen("volume "), "decrease", strlen("decrease")) == 0) {
             } else if (strncmp(req+strlen("volume "), "increase", strlen("increase")) == 0) {
             }

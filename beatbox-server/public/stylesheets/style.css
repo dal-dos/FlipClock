@@ -1,0 +1,135 @@
+* {
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+:root {
+	--background-grey: #202020;
+	--background-light-grey: #2e2e2e;
+	--button-hover-grey: #222222;
+	--button-active-grey: #191919;
+	--background-dark-grey: #1d1d1d;
+}
+
+body {
+	background-color: var(--background-grey);
+}
+
+.horizontal-divider {
+	margin: 16px 0;
+	border-bottom: 1px solid var(--background-grey);
+  }
+
+.centre-wrapper {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.centre-content-container {
+	display: flex;
+}
+
+.centre-left-container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	padding: 16px;
+	border-radius: 4px;
+	background-color: var(--background-light-grey);
+	margin-right: 32px;
+	min-width: 320px
+}
+
+.centre-right-container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	border-radius: 4px;
+	width: 320px;
+	background-color: var(--background-light-grey);
+}
+
+.selection-header {
+	font-size: 24px;
+	font-weight: bold;
+	padding: 4px;
+	margin-left: 0;
+}
+
+.button-flex-container {
+	display: flex;
+	flex-direction: row;
+	margin: 4px 0px 8px 4px;
+}
+
+.clickable-button {
+	font-size: 16px;
+	font-weight: bold;
+	height: 24px;
+	padding: 4px 8px;
+	margin-right: 8px;
+	border-radius: 4px;
+	background-color: var(--background-dark-grey);
+}
+
+.clickable-button > span {
+	vertical-align: middle;
+	user-select: none;
+	pointer-events: none;
+}
+
+.clickable-button:hover {
+	cursor: pointer;
+	background-color: var(--button-hover-grey);
+}
+
+.clickable-button:active {
+	cursor: pointer;
+	background-color: var(--button-active-grey);
+}
+
+.value-display {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	font-weight: bold;
+	height: 22px;
+	min-width: 28px;
+	padding: 4px 8px;
+	margin-right: 8px;
+	background-color: var(--background-grey);
+	border: solid 1px var(--background-dark-grey);
+}
+
+.value-display > span {
+	vertical-align: middle;
+}
+
+.description-container {
+	font-size: 16px;
+	padding: 4px;
+	margin-left: 1px;
+}
+
+#beat-value {
+	font-weight: bold;
+}
+
+#error-container {
+	border-radius: 4px;
+	margin: 16px 0;
+	padding: 8px;
+	background-color: #F7D4D9;
+}
+
+#error-container > div {
+	color: black;
+}
+
+#error-text {
+	color: black;
+	padding: 4px;
+}
