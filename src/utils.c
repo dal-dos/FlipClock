@@ -143,3 +143,13 @@ void Utils_readMultipleI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned c
         exit(1);
     }
 }
+
+long long Utils_get_time_in_ms(void) {
+    struct timespec spec;
+    clock_gettime(CLOCK_REALTIME, &spec);
+    long long seconds = spec.tv_sec;
+    long long nanoSeconds = spec.tv_nsec;
+    long long milliSeconds = seconds * 1000
+        + nanoSeconds / 1000000;
+    return milliSeconds;
+}
