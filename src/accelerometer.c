@@ -26,16 +26,7 @@ static pthread_t accel_thread;
 static bool running; // thread start/stop flag
 
 int accel_values[3] = {0};
-
-typedef enum {
-    X,
-    N_X,
-    Y,
-    N_Y,
-    Z,
-    N_Z,
-    NONE,
-} Accel_direction;
+static Accel_direction recent_trig = NONE;
 
 // read accelerometer values
 static void* accel_thread_helper(void* arg) {
@@ -43,6 +34,7 @@ static void* accel_thread_helper(void* arg) {
     Utils_writeI2cReg(i2cFileDesc_BUS1, 0x20, 0x27);
 
     Accel_direction prev_trig = NONE;
+
     while (running) {
         long long debounce_time = 25;
         unsigned char buff[BUFF_LEN];
@@ -53,7 +45,7 @@ static void* accel_thread_helper(void* arg) {
         //z -= 15000; // gravity offset
 
         int new_values[3] = {x, y, z};
-        int threshold = 10000;
+        int threshold = 15000;
         Accel_direction max_dir = NONE;
         if (abs(x) >= abs(y)) {
             if (abs(x) >= abs(z)) {
@@ -68,41 +60,42 @@ static void* accel_thread_helper(void* arg) {
         if ((x >= threshold) && max_dir == X) {
             if (prev_trig == X) {
                 debounce_time = 200;
-                printf("FLIPPED X\n");
+                recent_trig = X;
             }
             prev_trig = X;
         } else if ((x <= -threshold) && max_dir == X) {
             if (prev_trig == N_X) {
                 debounce_time = 200;
-                printf("FLIPPED -X\n");
+                recent_trig = N_X;
             }
             prev_trig = N_X;
         } else if ((y >= threshold) && max_dir == Y) {
             if (prev_trig == Y) {
                 debounce_time = 200;
-                printf("FLIPPED Y\n");
+                recent_trig = Y;
             }
             prev_trig = Y;
         } else if ((y <= -threshold) && max_dir == Y) {
             if (prev_trig == N_Y) {
                 debounce_time = 200;
-                printf("FLIPPED -Y\n");
+                recent_trig = N_Y;
             }
             prev_trig = N_Y;
         } else if ((z >= threshold) && max_dir == Z) {
             if (prev_trig == Z) {
                 debounce_time = 200;
-                printf("FLIPPED Z\n");
+                recent_trig = Z;
             }
             prev_trig = Z;
         } else if ((z <= -threshold) && max_dir == Z) {
             if (prev_trig == N_Z) {
                 debounce_time = 200;
-                printf("FLIPPED -Z\n");
+                recent_trig = N_Z;
             }
             prev_trig = N_Z;
         } else {
             prev_trig = NONE;
+            recent_trig = NONE;
         }
         memcpy(accel_values, new_values, sizeof(new_values));
         //printf("[x] %d, [y] %d, [z] %d\n", x, y, z);
@@ -130,4 +123,8 @@ void Accel_stop_thread(void) {
 
 int* Accel_get_values(void) {
     return accel_values;
+}
+
+Accel_direction Accel_get_recent_trig(void) {
+    return recent_trig;
 }

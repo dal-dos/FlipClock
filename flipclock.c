@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     //Clock_set_manual_time(8, 59);
     while(1) {
         int* accel_values = Accel_get_values();
-        printf("x: %d, y: %d, z: %d\n", accel_values[0], accel_values[1], accel_values[2]);
+        printf("[%d], x: %d, y: %d, z: %d\n", Accel_get_recent_trig(), accel_values[0], accel_values[1], accel_values[2]);
         
         Utils_sleep_for_ms(200);
     }
