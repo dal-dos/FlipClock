@@ -79,4 +79,5 @@ void Utils_writeI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char val
  */
 void Utils_readMultipleI2cReg(int i2cFileDesc, unsigned char regAddr, unsigned char* buff, int buff_len);
 
+long long Utils_get_time_in_ms(void);
 #endif
