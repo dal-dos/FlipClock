@@ -11,6 +11,7 @@ typedef enum {
     Z,
     N_Z,
     NONE,
+    LENGTH,
 } Accel_direction;
 
 // Starts/stops the thread to read and handle accelerometer values
