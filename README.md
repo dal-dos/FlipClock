@@ -13,9 +13,10 @@
 -   [Contributors](#contributors)
 
 # About
+
 Blah blah blah blah
 
-#Design
+# Design
 
 Blah blah blah blah
 
@@ -25,6 +26,8 @@ Blah blah blah blah
   </a>
  <h3 align="center">3D CAD Model</h3>
 </p>
+
+
 
 # Contributors
 - [Dalveer Dosanjh](https://github.com/dal-dos)
