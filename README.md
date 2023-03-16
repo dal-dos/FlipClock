@@ -15,6 +15,15 @@
 # About
 Blah blah blah blah
 
+#Design
+
+<p align="center">
+  <a href="https://github.com/dal-dos/FlipClock">
+  <img width="500px" src="https://user-images.githubusercontent.com/32851308/225766989-677715d3-f36a-44f9-86e7-6e40965920e2.png" align="center"/>
+  </a>
+ <h3 align="center">3D CAD Model</h3>
+</p>
+
 # Contributors
 - [Dalveer Dosanjh](https://github.com/dal-dos)
 - [Stephen Dao](https://github.com/pingoyes)
