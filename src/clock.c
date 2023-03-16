@@ -19,6 +19,7 @@ static long long manual_start_time = 0;
 
 static int current_hours = 0;
 static int current_minutes = 0;
+static int current_seconds = 0;
 
 static void calculate_manual_time(long long start_time, long long current_time);
 
@@ -28,12 +29,12 @@ static void* clock_thread_helper(void* arg) {
             struct tm ptm = Time_get_time_zone(current_time_zone);
             current_hours = ptm.tm_hour;
             current_minutes = ptm.tm_min;
-            printf("Current Time: %02d:%02d\n", current_hours, current_minutes);
+            printf("Current Time: %02d:%02d:%02d\n", current_hours, current_minutes, current_seconds);
         } else {
             calculate_manual_time(manual_start_time, Utils_get_time_in_ms());
-            printf("Current Time: %02d:%02d\n", current_hours, current_minutes);
+            printf("Current Time: %02d:%02d:%02d\n", current_hours, current_minutes, current_seconds);
         }
-        Utils_sleep_for_ms(500);
+        Utils_sleep_for_ms(1000);
     }
     return NULL;
 }
@@ -71,15 +72,16 @@ void Clock_set_time_zone(int time_zone) {
 static void calculate_manual_time(long long start_time, long long current_time) {
     long long ms_per_minute = 60000;
     long long ms_per_hour = 3600000; // 60*60*1000
+    long long ms_per_second = 1000;
     long long time_diff = current_time - start_time;
 
-    long long hours = (time_diff/ms_per_hour)%24;
-    long long minutes = ((time_diff-((time_diff/ms_per_hour)*ms_per_hour))/ms_per_minute)%60;
-    current_hours = hours;
-    current_minutes = minutes;
+    current_hours = (time_diff/ms_per_hour)%24;
+    current_minutes = ((time_diff-((time_diff/ms_per_hour)*ms_per_hour))/ms_per_minute)%60;
+    current_seconds = ((time_diff-((time_diff/ms_per_hour)*ms_per_hour)-(
+        ((time_diff-((time_diff/ms_per_hour)*ms_per_hour))/ms_per_minute)*ms_per_minute))/ms_per_second)%1000;
 }
 
 clock_time Clock_get_time(void) {
-    clock_time t = { current_hours, current_minutes };
+    clock_time t = { current_hours, current_minutes, current_seconds };
     return t;
 }

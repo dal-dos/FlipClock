@@ -4,7 +4,7 @@
 #define _CLOCK_H_
 
 typedef struct _clock_time {
-    int hours, minutes;
+    int hours, minutes, seconds;
 } clock_time;
 
 // start/stop the thread handling the clock display

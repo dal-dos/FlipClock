@@ -8,22 +8,22 @@
 #include "src/utils.h"
 #include "src/clock.h"
 #include "src/flip_game.h"
+#include "src/alarm.h"
 
 int main(int argc, char *argv[]) {
     Accel_start_thread();
-    //Clock_start_thread();
-    //Clock_set_manual_time(8, 59);
+    Clock_start_thread();
+    Alarm_start_thread();
+    Clock_set_manual_time(11, 21);
+    Alarm_set_trigger_time(11, 22);
     while(1) {
-        //int* accel_values = Accel_get_values();
-        //printf("[%d], x: %d, y: %d, z: %d\n", Accel_get_recent_trig(), accel_values[0], accel_values[1], accel_values[2]);
-        printf("[START]\n");
-        // alarm started
-        Flip_start_game(60*1000);
-        // stop alarm
-        printf("[DONE]\n\n");
-
-        Utils_sleep_for_ms(200);
+        if (Alarm_get_triggered()) {
+            Flip_start_game(60*1000);
+            Alarm_dismiss();
+        }
+        Utils_sleep_for_ms(500);
     }
     Accel_stop_thread();
-    //Clock_stop_thread();
+    Clock_stop_thread();
+    Alarm_stop_thread();
 }
