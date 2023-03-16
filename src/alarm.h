@@ -14,8 +14,8 @@ void Alarm_stop_thread(void);
 // set the alarm trigger time and arms the alarm clock
 void Alarm_set_trigger_time(unsigned int hours, unsigned int minutes);
 
-// set the time limit before the alarm self-dismisses
-void Alarm_set_timeout(unsigned long long dismiss_after);
+// set the time limit (in minutes) before the alarm self-dismisses
+void Alarm_set_timeout(unsigned int dismiss_after);
 
 // dismisses the alarm
 void Alarm_dismiss();

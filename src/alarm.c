@@ -37,7 +37,7 @@ static void* alarm_thread_helper(void* arg) {
                 triggered = false;
             }
         }
-        Utils_sleep_for_ms(500);
+        Utils_sleep_for_ms(250);
     }
     return NULL;
 }
@@ -60,8 +60,8 @@ void Alarm_set_trigger_time(unsigned int hours, unsigned int minutes) {
     armed = true;
 }
 
-void Alarm_set_timeout(unsigned long long dismiss_after) {
-    timeout = dismiss_after;
+void Alarm_set_timeout(unsigned int dismiss_after) {
+    timeout = dismiss_after*60*1000;
 }
 
 void Alarm_disable_alarm(void) {
