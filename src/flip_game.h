@@ -12,8 +12,9 @@
  * Starts a new flip game
  *
  * @param timeout a long long (milliseconds) representing the time limit of the game
+ * @param early_stop a pointer to a bool to allow the game to end early when false
  * @return a bool [true] when the game is completed or timeouts
  */
-bool Flip_start_game(long long timeout);
+bool Flip_start_game(long long timeout, bool* early_stop);
 
 #endif

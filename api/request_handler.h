@@ -11,7 +11,7 @@
  */
 void Handler_make_request(char* request, char* buff);
 
-// returns a bool representing whether the program should be running
-bool Handler_get_flag(void);
+// returns a pointer to a bool representing whether the program should be running
+bool* Handler_get_flag(void);
 
 #endif

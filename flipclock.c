@@ -20,9 +20,10 @@ int main(int argc, char *argv[]) {
 
     Clock_set_manual_time(11, 21);
     Alarm_set_trigger_time(11, 22);
-    while(Handler_get_flag()) {
+
+    while(*Handler_get_flag()) {
         if (Alarm_get_triggered()) {
-            Flip_start_game(Alarm_get_timeout());
+            Flip_start_game(Alarm_get_timeout(), Handler_get_flag());
             Alarm_dismiss();
         }
         Utils_sleep_for_ms(100);

@@ -28,7 +28,7 @@ static void* alarm_thread_helper(void* arg) {
                     && (current_time.seconds == trigger_time.seconds)) { // only trigger at the start of the minute
                 triggered = true;
                 printf("[Alarm started]\n");
-                while (((timeout > 0) && (Utils_get_time_in_ms()-start_time) < timeout) && !dismissed) {
+                while (((timeout > 0) && (Utils_get_time_in_ms()-start_time) < timeout) && !dismissed && running) {
                     // play alarm sounds here
                     Utils_sleep_for_ms(100);
                 }
