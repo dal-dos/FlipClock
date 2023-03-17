@@ -18,8 +18,8 @@ var client = dgram.createSocket('udp4');
 
 exports.listen = function(server) {
 	io = socketio.listen(server);
-	io.set('log level 1');
-	io.set('heartbeat interval', 1000);
+	//io.set('log level 1');
+	//io.set('heartbeat interval', 1000);
 
 	client.bind(12312);
 
@@ -40,10 +40,8 @@ exports.listen = function(server) {
 	});
 };
 
-var timer;
-var errorDetected = false;
 function handleCommand(socket) {
-	setInterval(() => { readFile('/proc/uptime', socket); }, 1000);
+	//setInterval(() => { readFile('/proc/uptime', socket); }, 1000);
 	socket.on('daUdpCommand', function(data) {
 		console.log('daUdpCommand command: ' + data);
 		var buffer = new Buffer(data);
@@ -53,18 +51,8 @@ function handleCommand(socket) {
 				throw err;
 			console.log('UDP message sent to ' + HOST +':'+ PORT);
 		});
-		clearTimeout(timer);
-		timer = setTimeout(() => {
-			socket.emit("error", "Receiving no reply from C application");
-			errorDetected = true;
-		}, 1000);
 	});
 	client.on('message', function (message, remote) {
-		clearTimeout(timer);
-		if (errorDetected) {
-			errorDetected = false;
-			socket.emit("errorClear");
-		}
 		console.log("UDP Client: message Rx" + remote.address + ':' + remote.port +' - ' + message);
 
 		var reply = message.toString('utf8')
@@ -74,13 +62,3 @@ function handleCommand(socket) {
 
 	});
 };
-
-function readFile(filePath, socket) {
-	fs.readFile(filePath, 'utf8', (err, data) => {
-		if (err) {
-			console.error(err);
-			return;
-		}
-		socket.emit('uptime', data);
-	});
-}

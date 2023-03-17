@@ -63,7 +63,7 @@ void Handler_make_request(char* request, char* buff) {
                     base, time_zone);
             } else if (strncmp(req, "time=", strlen("time=")) == 0) {
                 char* value = req+strlen("time=");
-                if (value[0] == '{' && value[strlen(value)-2] == '}') {
+                if (value[0] == '{' && value[strlen(value)-1] == '}') {
                     char *split = strtok(value+1, ",");
                     int hours = (int)strtol(split, (char**)NULL, 10);
                     split = strtok (NULL, "}");
@@ -89,7 +89,7 @@ void Handler_make_request(char* request, char* buff) {
                     base, timeout);
             } else if (strncmp(req, "time=", strlen("time=")) == 0) {
                 char* value = req+strlen("time=");
-                if (value[0] == '{' && value[strlen(value)-2] == '}') {
+                if (value[0] == '{' && value[strlen(value)-1] == '}') {
                     char *split = strtok(value+1, ",");
                     int hours = (int)strtol(split, (char**)NULL, 10);
                     split = strtok (NULL, "}");

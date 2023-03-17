@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<link rel='stylesheet' href='/stylesheets/style.css'></link>
+</head>
+
+<body>
+	<div id="wrapper" class="centre-wrapper">
+		<div class="centre-top-container">
+			<h1 id="header1">Alarm Clock</h1>
+		</div>
+		<div class="centre-content-container">
+			<div class="centre-left-container">
+				<div class="selection-header">Current time</div>
+				<div class="clock-display-container">
+					<div id="clock-display">00:00:00</div>
+					<div id="clock-set-time-container" style="display:none">
+						<input type="text" pattern="[0-1]{1}[0-9]{1}|20|21|22|23"
+							class="clock-set-time" id="clock-set-hours" minlength="1" maxlength="2"/>
+						<span id="clock-set-time-divider">:</span>
+						<input type="text" pattern="[0-5]{1}[0-9]{1}"
+							class="clock-set-time" id="clock-set-minutes" minlength="1" maxlength="2"/>		
+					</div>
+					</div>
+				<div class="clock-edit-container">
+					<span class="clickable-text" id="edit-clock" onclick="editClock()">Edit time</span>
+					<div id="clock-edit-confirm-cancel" style="display:none">
+						<span class="clickable-text" onclick="confirmClockEdit()">
+							Confirm
+						</span>
+						<span> | </span>
+						<span class="clickable-text" onclick="cancelClockEdit()">
+							Cancel
+						</span>
+					</div>
+				</div>
+				<div class="horizontal-divider-light"></div>
+				<div class="display-container">
+					<div id="alarm-display">Next alarm at: 00:00</div>
+				</div>
+			</div>
+			<div class="centre-right-container">
+				
+			</div>
+		</div>
+	</div>
+	
+	<script src='/socket.io/socket.io.js' type='text/javascript'></script>
+	<script src='http://code.jquery.com/jquery-1.8.0.min.js' type='text/javascript'></script>
+	<script src='javascripts/udp_ui.js' type='text/javascript'></script>
+</body>
+</html>
