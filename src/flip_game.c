@@ -88,7 +88,7 @@ bool Flip_start_game(long long timeout, bool* early_stop) {
             if (time_elapsed >= timeout) { break; }
             if (!(*early_stop)) { break; }
         }
-        if (time_elapsed >= timeout) { break; }
+        if (time_elapsed >= timeout) { return false; }
         if (!(*early_stop)) { break; }
         printf("*\n");
         Utils_sleep_for_ms(1000);

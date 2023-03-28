@@ -27,8 +27,9 @@ int main(int argc, char *argv[]) {
 
     while(*Handler_get_flag()) {
         if (Alarm_get_triggered()) {
-            Flip_start_game(Alarm_get_timeout(), Handler_get_flag());
-            Alarm_dismiss();
+            if (Flip_start_game(Alarm_get_timeout(), Handler_get_flag())) {
+                Alarm_dismiss();
+            }
         }
         Utils_sleep_for_ms(100);
     }

@@ -137,3 +137,14 @@ body {
 	border: none;
 	font-size: 14px;
 }
+
+#alarm-timeout-container {
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+#alarm-timeout-select {
+	background-color: var(--background-grey);
+	border: none;
+	font-size: 14px;
+}

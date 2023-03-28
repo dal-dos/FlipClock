@@ -27,10 +27,10 @@ static void* alarm_thread_helper(void* arg) {
     while (running) {
         if (armed) {
             clock_time current_time = Clock_get_time();
-            long long start_time = Utils_get_time_in_ms();
             if ((current_time.hours == trigger_time.hours) // Alarm triggered
                     && (current_time.minutes == trigger_time.minutes)
                     && (current_time.seconds == trigger_time.seconds)) { // only trigger at the start of the minute
+                long long start_time = Utils_get_time_in_ms();
                 triggered = true;
                 int itr_count = 0;
                 const int sound_interval = 1000; // ms

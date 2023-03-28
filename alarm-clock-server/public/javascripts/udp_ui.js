@@ -43,7 +43,8 @@ function handleReply(result) {
 			$('#clock-set-minutes').val(minutes);
 		}
 	} else if (result.indexOf("alarm/timeout") >= 0) {
-		$('#beat-value').text(result.substring("beat ".length));
+		const data = JSON.parse(result.split("=")[1]);
+		$('#alarm-timeout-select').val(data["minutes"]);
 	} else if (result.indexOf("alarm/time") >= 0) {
 		const data = JSON.parse(result.split("=")[1]);
 		const hours = (data["hours"]).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
@@ -96,7 +97,9 @@ function editAlarm() {
 function confirmAlarmEdit() {
 	const hours = $('#alarm-set-hours').val();
 	const minutes = $('#alarm-set-minutes').val();
+	const timeout = Number($('#alarm-timeout-select').val());
 	sendCommandViaUDP(`set/alarm/time={${hours},${minutes}}`);
+	sendCommandViaUDP(`set/alarm/timeout=${timeout}`);
 	$('#alarm-set-time-container').hide();
 	$('#alarm-edit-confirm-cancel').hide();
 	$('#alarm-display').show();
