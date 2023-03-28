@@ -24,17 +24,21 @@ static int current_seconds = 0;
 static void calculate_manual_time(long long start_time, long long current_time);
 
 static void* clock_thread_helper(void* arg) {
+    int count = 0;
     while (running) {
+        count++;
         if (automatic_time) {
             struct tm ptm = Time_get_time_zone(current_time_zone);
             current_hours = ptm.tm_hour;
             current_minutes = ptm.tm_min;
-            printf("Current Time: %02d:%02d:%02d\n", current_hours, current_minutes, current_seconds);
+            current_seconds = ptm.tm_sec;
         } else {
             calculate_manual_time(manual_start_time, Utils_get_time_in_ms());
+        }
+        if (count%2 == 0) { // for console, print every 2 updates
             printf("Current Time: %02d:%02d:%02d\n", current_hours, current_minutes, current_seconds);
         }
-        Utils_sleep_for_ms(1000);
+        Utils_sleep_for_ms(500);
     }
     return NULL;
 }
@@ -60,6 +64,7 @@ void Clock_set_manual_time(unsigned int hours, unsigned int minutes) {
     manual_start_time = Utils_get_time_in_ms() - (new_hours*ms_per_hour) - (new_minutes*ms_per_minute);
     current_hours = new_hours;
     current_minutes = new_minutes;
+    current_seconds = 0;
     automatic_time = false;
 }
 
@@ -81,7 +86,19 @@ static void calculate_manual_time(long long start_time, long long current_time) 
         ((time_diff-((time_diff/ms_per_hour)*ms_per_hour))/ms_per_minute)*ms_per_minute))/ms_per_second)%1000;
 }
 
+void Clock_set_automatic_time(bool automatic) {
+    automatic_time = automatic;
+}
+
 clock_time Clock_get_time(void) {
     clock_time t = { current_hours, current_minutes, current_seconds };
     return t;
+}
+
+int Clock_get_time_zone(void) {
+    return current_time_zone;
+}
+
+bool Clock_get_automatic_time(void) {
+    return automatic_time;
 }

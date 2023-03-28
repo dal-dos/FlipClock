@@ -1,9 +1,7 @@
 // request_hander.h
-// module to handle api requests
+// API to handle socket messages
 #ifndef _REQUEST_HANDLER_H_
 #define _REQUEST_HANDLER_H_
-
-#include <netdb.h>
 
 /**
  * Handle an api request
@@ -13,7 +11,7 @@
  */
 void Handler_make_request(char* request, char* buff);
 
-// returns a bool representing whether the program should be running
-bool Handler_get_flag(void);
+// returns a pointer to a bool representing whether the program should be running
+bool* Handler_get_flag(void);
 
 #endif

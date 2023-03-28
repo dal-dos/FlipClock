@@ -1,5 +1,6 @@
 // udp_socket.h
 // Module containing a socket that listens for commands
+// For testing: netcat -u 192.168.7.2 {PORT}
 #ifndef _UDP_SOCKET_H_
 #define _UDP_SOCKET_H_
 

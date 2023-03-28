@@ -31,7 +31,7 @@
 //     pthread_join(flip_thread, NULL);
 // }
 
-bool Flip_start_game(long long timeout) {
+bool Flip_start_game(long long timeout, bool* early_stop) {
     Accel_direction flip_values[MAX_FLIPS] = {NONE};
     srand(time(NULL));
     // generate values
@@ -86,8 +86,10 @@ bool Flip_start_game(long long timeout) {
         while (Accel_get_recent_trig() != flip_values[i]) {
             time_elapsed = Utils_get_time_in_ms()-start_time;
             if (time_elapsed >= timeout) { break; }
+            if (!(*early_stop)) { break; }
         }
-        if (time_elapsed >= timeout) { break; }
+        if (time_elapsed >= timeout) { return false; }
+        if (!(*early_stop)) { break; }
         printf("*\n");
         Utils_sleep_for_ms(1000);
     }

@@ -1,0 +1,150 @@
+* {
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+:root {
+	--background-grey: #202020;
+	--background-light-grey: #2e2e2e;
+	--button-hover-grey: #222222;
+	--button-active-grey: #191919;
+	--background-dark-grey: #1d1d1d;
+}
+
+body {
+	background-color: var(--background-dark-grey);
+}
+
+.horizontal-divider {
+	margin: 16px 0;
+	border-bottom: 1px solid var(--background-grey);
+}
+
+.horizontal-divider-light {
+	margin: 16px 8px;
+	border-bottom: 1px solid #333333;
+}
+
+.centre-wrapper {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.centre-content-container {
+	display: flex;
+}
+
+.centre-left-container {
+	display: flex;
+	flex-direction: column;
+	/* flex-grow: 1; */
+	padding: 8px;
+	border-radius: 4px;
+	background-color: var(--background-light-grey);
+	margin-right: 32px;
+	min-width: 320px
+}
+
+.centre-right-container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	border-radius: 4px;
+	min-width: 320px;
+	background-color: var(--background-light-grey);
+}
+
+.clock-display-container {
+	padding: 16px;
+	margin: 8px;
+	border-radius: 4px;
+	min-width: 285px;
+	background-color: var(--background-grey);
+}
+
+#clock-display {
+	font-size: 72px;
+	font-weight: bold;
+}
+
+.clock-set-time {
+	font-size: 72px;
+	max-width: 90px;
+	padding: 0;
+	border: none;
+	background-color: var(--background-light-grey);
+}
+
+#clock-set-time-divider {
+	font-size: 72px;
+	font-weight: bold;
+}
+
+.edit-container {
+	padding: 4px;
+	margin: 0 8px;
+}
+
+.display-container {
+	padding: 8px;
+	margin: 8px;
+	border-radius: 4px;
+	background-color: var(--background-grey);
+}
+
+#alarm-display {
+	font-size: 32px;
+}
+
+#alarm-display-label {
+	font-size: 28px;
+}
+
+.alarm-set-time {
+	font-size: 32px;
+	max-width: 38px;
+	padding: 0;
+	border: none;
+	background-color: var(--background-light-grey);
+}
+
+#alarm-set-time-divider {
+	font-size: 32px;
+	font-weight: bold;
+}
+
+.selection-header {
+	font-size: 32px;
+	font-weight: bold;
+	padding: 4px;
+	margin-left: 0;
+}
+
+.clickable-text:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+#time-zone-container {
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+#time-zone-select {
+	background-color: var(--background-grey);
+	border: none;
+	font-size: 14px;
+}
+
+#alarm-timeout-container {
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+#alarm-timeout-select {
+	background-color: var(--background-grey);
+	border: none;
+	font-size: 14px;
+}

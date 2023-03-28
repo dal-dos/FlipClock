@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<link rel='stylesheet' href='/stylesheets/style.css'></link>
+</head>
+
+<body>
+	<div id="wrapper" class="centre-wrapper">
+		<div class="centre-top-container">
+			<h1 id="header1">Alarm Clock</h1>
+		</div>
+		<div class="centre-content-container">
+			<div class="centre-left-container">
+				<div class="selection-header">Current time</div>
+				<div class="clock-display-container">
+					<div id="clock-display">00:00:00</div>
+					<div id="clock-set-time-container" style="display:none">
+						<input type="text" pattern="[0-1]{1}[0-9]{1}|20|21|22|23"
+							class="clock-set-time" id="clock-set-hours" minlength="1" maxlength="2"/>
+						<span id="clock-set-time-divider">:</span>
+						<input type="text" pattern="[0-5]{1}[0-9]{1}"
+							class="clock-set-time" id="clock-set-minutes" minlength="1" maxlength="2"/>		
+					</div>
+				</div>
+				<div class="edit-container">
+					<span class="clickable-text" id="edit-clock" onclick="editClock()">Edit time</span>
+					<div id="clock-edit-confirm-cancel" style="display:none">
+						<span class="clickable-text" onclick="confirmClockEdit()">
+							Confirm
+						</span>
+						<span> | </span>
+						<span class="clickable-text" onclick="cancelClockEdit()">
+							Cancel
+						</span>
+						<div id="time-zone-container">
+							<span>Select time zone: </span>
+							<select name="time-zones" id="time-zone-select">
+								<option value="-">---</option>
+								<option value="-7">(UTC-7) PDT</option>
+								<option value="0">(UTC)</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="horizontal-divider-light"></div>
+				<div class="display-container">
+					<div id="alarm-display-container">
+						<span id="alarm-display-label">Next alarm at: </span>
+						<span id="alarm-display">00:00</span>
+						<span id="alarm-set-time-container" style="display:none">
+							<input type="text" pattern="[0-1]{1}[0-9]{1}|20|21|22|23"
+								class="alarm-set-time" id="alarm-set-hours" minlength="1" maxlength="2"/>
+							<span id="alarm-set-time-divider">:</span>
+							<input type="text" pattern="[0-5]{1}[0-9]{1}"
+								class="alarm-set-time" id="alarm-set-minutes" minlength="1" maxlength="2"/>
+						</span>	
+					</div>
+				</div>
+				<div class="edit-container">
+					<span class="clickable-text" id="edit-alarm" onclick="editAlarm()">Edit time</span>
+					<div id="alarm-edit-confirm-cancel" style="display:none">
+						<span class="clickable-text" onclick="confirmAlarmEdit()">
+							Confirm
+						</span>
+						<span> | </span>
+						<span class="clickable-text" onclick="cancelAlarmEdit()">
+							Cancel
+						</span>
+						<div id="alarm-timeout-container">
+							<span>Select timeout: </span>
+							<select name="alarm-timeout" id="alarm-timeout-select">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+							<span>minute/s</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="centre-right-container">
+				
+			</div>
+		</div>
+	</div>
+	
+	<script src='/socket.io/socket.io.js' type='text/javascript'></script>
+	<script src='http://code.jquery.com/jquery-1.8.0.min.js' type='text/javascript'></script>
+	<script src='javascripts/udp_ui.js' type='text/javascript'></script>
+</body>
+</html>
