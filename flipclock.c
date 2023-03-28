@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     AudioMixer_setVolume(100);
 
     Alarm_set_trigger_time(11, 22);
-    Clock_set_manual_time(11, 21);
+    //Clock_set_manual_time(11, 21);
 
     while(*Handler_get_flag()) {
         if (Alarm_get_triggered()) {

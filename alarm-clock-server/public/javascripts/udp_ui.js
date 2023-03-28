@@ -29,7 +29,8 @@ function sendCommandViaUDP(message) {
 
 function handleReply(result) {
 	if (result.indexOf("clock/time_zone") >= 0) {
-		$('#beat-value').text(result.substring("beat ".length));
+		const data = JSON.parse(result.split("=")[1]);
+		$('#time-zone-select').val(data["hours"]);
 	} else if (result.indexOf("clock/time") >= 0) {
 		const data = JSON.parse(result.split("=")[1]);
 		const hours = (data["hours"]).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
@@ -47,8 +48,12 @@ function handleReply(result) {
 		const data = JSON.parse(result.split("=")[1]);
 		const hours = (data["hours"]).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
 		const minutes = (data["minutes"]).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
-		const text = `Next alarm at: ${hours}:${minutes}`;
+		const text = `${hours}:${minutes}`;
 		$('#alarm-display').text(text);
+		if (!$('#alarm-set-time-container').is(":visible")) {
+			$('#alarm-set-hours').val(hours);
+			$('#alarm-set-minutes').val(minutes);
+		}
 	}
 }
 
@@ -62,7 +67,12 @@ function editClock() {
 function confirmClockEdit() {
 	const hours = $('#clock-set-hours').val();
 	const minutes = $('#clock-set-minutes').val();
-	sendCommandViaUDP(`set/clock/time={${hours},${minutes}}`);
+	const time_zone = $('#time-zone-select').val();
+	if ($('#time-zone-select').val() == "-") {
+		sendCommandViaUDP(`set/clock/time={${hours},${minutes}}`);
+	} else {
+		sendCommandViaUDP(`set/clock/time_zone=${time_zone}`);
+	}
 	$('#clock-set-time-container').hide();
 	$('#clock-edit-confirm-cancel').hide();
 	$('#clock-display').show();
@@ -74,4 +84,28 @@ function cancelClockEdit() {
 	$('#clock-edit-confirm-cancel').hide();
 	$('#clock-display').show();
 	$('#edit-clock').show();
+}
+
+function editAlarm() {
+	$('#edit-alarm').hide();
+	$('#alarm-edit-confirm-cancel').show();
+	$('#alarm-display').hide();
+	$('#alarm-set-time-container').show();
+}
+
+function confirmAlarmEdit() {
+	const hours = $('#alarm-set-hours').val();
+	const minutes = $('#alarm-set-minutes').val();
+	sendCommandViaUDP(`set/alarm/time={${hours},${minutes}}`);
+	$('#alarm-set-time-container').hide();
+	$('#alarm-edit-confirm-cancel').hide();
+	$('#alarm-display').show();
+	$('#edit-alarm').show();
+}
+
+function cancelAlarmEdit() {
+	$('#alarm-set-time-container').hide();
+	$('#alarm-edit-confirm-cancel').hide();
+	$('#alarm-display').show();
+	$('#edit-alarm').show();
 }

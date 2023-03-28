@@ -25,9 +25,15 @@ void Handler_make_request(char* request, char* buff) {
             req = req+strlen(base);
             if (strncmp(req, "time_zone", strlen("time_zone")) == 0) {
                 int time_zone = Clock_get_time_zone();
-                snprintf(buff, MSG_MAX_LEN-1,
-                    "%stime_zone={\"hours\":%d}",
-                    base, time_zone);
+                if (!Clock_get_automatic_time()) {
+                    snprintf(buff, MSG_MAX_LEN-1,
+                    "%stime_zone={\"hours\":'-'}",
+                    base);
+                } else {
+                    snprintf(buff, MSG_MAX_LEN-1,
+                        "%stime_zone={\"hours\":%d}",
+                        base, time_zone);
+                }
             } else if (strncmp(req, "time", strlen("time")) == 0) {
                 clock_time c_t = Clock_get_time();
                 snprintf(buff, MSG_MAX_LEN-1,

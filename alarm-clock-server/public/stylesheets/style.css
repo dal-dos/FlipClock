@@ -82,7 +82,7 @@ body {
 	font-weight: bold;
 }
 
-.clock-edit-container {
+.edit-container {
 	padding: 4px;
 	margin: 0 8px;
 }
@@ -98,6 +98,23 @@ body {
 	font-size: 32px;
 }
 
+#alarm-display-label {
+	font-size: 28px;
+}
+
+.alarm-set-time {
+	font-size: 32px;
+	max-width: 38px;
+	padding: 0;
+	border: none;
+	background-color: var(--background-light-grey);
+}
+
+#alarm-set-time-divider {
+	font-size: 32px;
+	font-weight: bold;
+}
+
 .selection-header {
 	font-size: 32px;
 	font-weight: bold;
@@ -108,4 +125,15 @@ body {
 .clickable-text:hover {
 	cursor: pointer;
 	text-decoration: underline;
+}
+
+#time-zone-container {
+	margin-top: 8px;
+	font-weight: bold;
+}
+
+#time-zone-select {
+	background-color: var(--background-grey);
+	border: none;
+	font-size: 14px;
 }
