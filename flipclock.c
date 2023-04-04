@@ -10,6 +10,7 @@
 #include "src/flip_game.h"
 #include "src/alarm.h"
 #include "src/audio_mixer.h"
+#include "src/seg_display.h"
 #include "api/request_handler.h"
 #include "api/udp_socket.h"
 
@@ -18,6 +19,7 @@ int main(int argc, char *argv[]) {
     Accel_start_thread();
     Clock_start_thread();
     Alarm_start_thread();
+    Seg_start_thread();
     UDP_start_listening(12345);
 
     AudioMixer_setVolume(100);
@@ -37,5 +39,6 @@ int main(int argc, char *argv[]) {
     Accel_stop_thread();
     Clock_stop_thread();
     Alarm_stop_thread();
+    Seg_stop_thread();
     UDP_stop_listening();
 }
