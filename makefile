@@ -11,10 +11,11 @@ CFLAGS = -Wall -g -std=c99 -D _POSIX_C_SOURCE=200809L -Werror -Wshadow -pthread
 LFLAGS = -L$(HOME)/cmpt433/public/asound_lib_BBB
 
 all: flipclock server wav
-flipclock: accelerometer.o utils.o time_utils.o clock.o request_handler.o udp_socket.o flip_game.o alarm.o
+flipclock: accelerometer.o utils.o time_utils.o clock.o request_handler.o udp_socket.o flip_game.o alarm.o seg_display.o
 	$(CC_C) $(CFLAGS) flipclock.c $(SRCDIR)/audio_mixer.c -o $(OUTDIR)/$(OUTFILE) $(LFLAGS) -lasound \
 	$(OUTDIR)/accelerometer.o $(OUTDIR)/utils.o $(OUTDIR)/time_utils.o $(OUTDIR)/clock.o \
-	$(OUTDIR)/udp_socket.o $(OUTDIR)/request_handler.o $(OUTDIR)/flip_game.o $(OUTDIR)/alarm.o
+	$(OUTDIR)/udp_socket.o $(OUTDIR)/request_handler.o $(OUTDIR)/flip_game.o $(OUTDIR)/alarm.o \
+	$(OUTDIR)/seg_display.o
 
 %.o: $(SRCDIR)/%.c $(SRCDIR)/%.h
 	$(CC_C) $(CFLAGS) -c $< -o $(OUTDIR)/$@

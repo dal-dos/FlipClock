@@ -7,6 +7,7 @@
 
 #include "flip_game.h"
 #include "accelerometer.h"
+#include "audio_mixer.h"
 #include "utils.h"
 
 // static pthread_t flip_thread;
@@ -14,6 +15,13 @@
 
 #define MAX_FLIPS 6
 #define MIN_FLIPS 3
+
+#define RED_FILE "audio_files/red.wav"
+#define GREEN_FILE "audio_files/green.wav"
+#define BLUE_FILE "audio_files/blue.wav"
+#define BLACK_FILE "audio_files/black.wav"
+#define PURPLE_FILE "audio_files/purple.wav"
+#define YELLOW_FILE "audio_files/yellow.wav"
 
 // static void* flip_thread_helper(void* arg) {
 
@@ -55,38 +63,62 @@ bool Flip_start_game(long long timeout, bool* early_stop) {
     }
 
     long long start_time = Utils_get_time_in_ms();
+    wavedata_t red_sound, green_sound, blue_sound, black_sound, purple_sound, yellow_sound;
+    AudioMixer_readWaveFileIntoMemory(RED_FILE, &red_sound);
+    AudioMixer_readWaveFileIntoMemory(GREEN_FILE, &green_sound);
+    AudioMixer_readWaveFileIntoMemory(BLUE_FILE, &blue_sound);
+    AudioMixer_readWaveFileIntoMemory(BLACK_FILE, &black_sound);
+    AudioMixer_readWaveFileIntoMemory(PURPLE_FILE, &purple_sound);
+    AudioMixer_readWaveFileIntoMemory(YELLOW_FILE, &yellow_sound);
+
     // start checking
     for (int i = 0; i < flip_count; i++) {
         long long time_elapsed = 0;
         // replace with LED indicators
+        wavedata_t* current_sound;
         switch(flip_values[i]) {
             case 0:
-                printf("LEFT\n");
+                printf("RIGHT\n");
+                current_sound = &purple_sound;
                 break;
             case 1:
-                printf("RIGHT\n");
+                printf("LEFT\n");
+                current_sound = &yellow_sound;
                 break;
             case 2:
-                printf("BACK\n");
+                printf("FRONT\n");
+                current_sound = &blue_sound;
                 break;
             case 3:
-                printf("FRONT\n");
+                printf("BACK\n");
+                current_sound = &black_sound;
                 break;
             case 4:
                 printf("TOP\n");
+                current_sound = &red_sound;
                 break;
             case 5:
                 printf("BOTTOM\n");
+                current_sound = &green_sound;
                 break;
             case 6:
                 break;
             case 7:
                 break;
         }
+
+        int itr_count = 0;
+        const int sound_interval = 2000; // ms
+        const int sleep_for = 100;
         while (Accel_get_recent_trig() != flip_values[i]) {
+            if (itr_count % (sound_interval/sleep_for) == 0) { // only queue sound every x intervals
+                AudioMixer_queueSound(current_sound);
+            }
+            itr_count++;
             time_elapsed = Utils_get_time_in_ms()-start_time;
             if (time_elapsed >= timeout) { break; }
             if (!(*early_stop)) { break; }
+            Utils_sleep_for_ms(sleep_for);
         }
         if (time_elapsed >= timeout) { return false; }
         if (!(*early_stop)) { break; }
